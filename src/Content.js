@@ -1,31 +1,32 @@
+import { useState } from "react";
+
 const Content = () => {
+    const [name, setName] = useState("Guest");
+    const [count, setCount] = useState(0);
+
     const handleNameChange = () => {
         const names = ["Clark", "Bruce", "Diana"];
         const int = Math.floor(Math.random() * 3);
-        return names[int];
+        setName(names[int]);
     };
 
     const handleClick = () => {
-        console.log("Simple Click");
+        setCount(count + 1);
+        console.log(count);
     };
 
     const handleClick2 = (param) => {
-        console.log(`An ${param} was passed`);
-    };
-
-    const handleClick3 = (e) => {
-        console.log(e.target.innerText);
+        console.log(count);
     };
 
     return (
         <main>
             <p on onDoubleClick={handleClick}>
-                {" "}
-                Hello {handleNameChange()}{" "}
+                Hello {name}
             </p>
-            <button onClick={handleClick}>Click Me</button>
-            <button onClick={() => handleClick2("argument")}>Click Me 2</button>
-            <button onClick={(e) => handleClick3(e)}>Click Me 3</button>
+            <button onClick={handleNameChange}>Change Name</button>
+            <button onClick={handleClick}>Click Me 2</button>
+            <button onClick={handleClick2}>Click Me 3</button>
         </main>
     );
 };
