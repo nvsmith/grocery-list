@@ -17,5 +17,3 @@ const Content = ({ items, handleCheck, handleDelete }) => {
 };
 
 export default Content;
-
-// Chapter 9
