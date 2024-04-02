@@ -3,35 +3,37 @@ import SearchItem from "./SearchItem";
 import AddItem from "./AddItem";
 import Content from "./Content";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-    const [items, setItems] = useState(JSON.parse(localStorage.getItem("shoppinglist")));
+    const API_URL = "http://localhost:3500/items";
+
+    // Loads empty array if shopping list is empty
+    const [items, setItems] = useState(JSON.parse(localStorage.getItem("shoppinglist")) || []);
     const [newItem, setNewItem] = useState("");
     const [search, setSearch] = useState("");
 
-    const setAndSaveItems = (newItems) => {
-        setItems(newItems);
-        localStorage.setItem("shoppinglist", JSON.stringify(newItems));
-    };
+    useEffect(() => {
+        localStorage.setItem("shoppinglist", JSON.stringify(items));
+    }, [items]);
 
     const addItem = (item) => {
         const id = items.length ? items[items.length - 1].id + 1 : 1;
         const myNewItem = { id, checked: false, item };
         const listItems = [...items, myNewItem];
-        setAndSaveItems(listItems);
+        setItems(listItems);
     };
 
     const handleCheck = (id) => {
         // console.log(`key: ${id}`);
         const listItems = items.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item));
-        setAndSaveItems(listItems);
+        setItems(listItems);
     };
 
     const handleDelete = (id) => {
         // console.log(id);
         const listItems = items.filter((item) => item.id !== id);
-        setAndSaveItems(listItems);
+        setItems(listItems);
     };
 
     const handleSubmit = (e) => {
@@ -66,4 +68,4 @@ function App() {
 
 export default App;
 
-// Chapt 10
+// Chapt 13
