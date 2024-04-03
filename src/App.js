@@ -38,7 +38,8 @@ function App() {
     }, []);
 
     const addItem = async (item) => {
-        const id = items.length ? items[items.length - 1].id + 1 : 1;
+        // const id = items.length ? items[items.length - 1].id + 1 : 1;
+        const id = items.length ? parseInt(items[items.length - 1].id) + 1 : 1;
         const myNewItem = { id, checked: false, item };
         const listItems = [...items, myNewItem];
         setItems(listItems);
@@ -123,4 +124,4 @@ function App() {
 
 export default App;
 
-// Chapt 14
+// Chapt 15
