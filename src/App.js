@@ -4,6 +4,7 @@ import AddItem from "./AddItem";
 import Content from "./Content";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
+import apiRequest from "./apiRequest";
 
 function App() {
     const API_URL = "http://localhost:3500/items";
@@ -30,7 +31,7 @@ function App() {
             }
         };
 
-        // SETTIMEOUT FOR TESTING ONLY
+        // SETTIMEOUT FOR TESTING ONLY; simulates a server response
         setTimeout(() => {
             (async () => await fetchItems())();
         }, 2000);
@@ -93,4 +94,4 @@ function App() {
 
 export default App;
 
-// Chapt 13
+// Chapt 14
