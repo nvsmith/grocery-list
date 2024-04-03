@@ -42,7 +42,7 @@ function App() {
         const myNewItem = { id, checked: false, item };
         const listItems = [...items, myNewItem];
         setItems(listItems);
-
+        // Create item for DB
         const postOptions = {
             method: "POST",
             headers: {
@@ -54,10 +54,23 @@ function App() {
         if (result) setFetchError(result);
     };
 
-    const handleCheck = (id) => {
+    const handleCheck = async (id) => {
         // console.log(`key: ${id}`);
         const listItems = items.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item));
         setItems(listItems);
+        // gets the checked item
+        const myItem = listItems.filter((item) => item.id === id);
+        // Update item for DB
+        const updateOptions = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ checked: myItem[0].checked }),
+        };
+        const requestUrl = `${API_URL}/${id}`;
+        const result = await apiRequest(requestUrl, updateOptions);
+        if (result) setFetchError(result);
     };
 
     const handleDelete = (id) => {
