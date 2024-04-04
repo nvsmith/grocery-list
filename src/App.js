@@ -34,11 +34,10 @@ function App() {
         // SETTIMEOUT FOR TESTING ONLY; simulates a server response
         setTimeout(() => {
             (async () => await fetchItems())();
-        }, 2000);
+        }, 1000);
     }, []);
 
     const addItem = async (item) => {
-        // const id = items.length ? items[items.length - 1].id + 1 : 1;
         const id = items.length ? parseInt(items[items.length - 1].id) + 1 : 1;
         const myNewItem = { id, checked: false, item };
         const listItems = [...items, myNewItem];
@@ -56,10 +55,9 @@ function App() {
     };
 
     const handleCheck = async (id) => {
-        // console.log(`key: ${id}`);
         const listItems = items.map((item) => (item.id === id ? { ...item, checked: !item.checked } : item));
         setItems(listItems);
-        // gets the checked item
+        // Gets the checked item
         const myItem = listItems.filter((item) => item.id === id);
         // Update item for DB
         const updateOptions = {
@@ -75,7 +73,6 @@ function App() {
     };
 
     const handleDelete = async (id) => {
-        // console.log(id);
         const listItems = items.filter((item) => item.id !== id);
         setItems(listItems);
 
@@ -89,7 +86,6 @@ function App() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!newItem) return;
-        // console.log(newItem);
         addItem(newItem);
         setNewItem("");
     };
@@ -123,5 +119,3 @@ function App() {
 }
 
 export default App;
-
-// Chapt 15
